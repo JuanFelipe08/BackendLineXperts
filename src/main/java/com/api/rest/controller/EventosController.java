@@ -1,9 +1,5 @@
 package com.api.rest.controller;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +29,7 @@ public class EventosController {
 	
 	@PostMapping()
     public ResponseEntity<Eventos> addEvento(@RequestBody Eventos evento) {
-		evento.setPla_Codigo(0);
+		evento.setEve_Codigo(0);
 		
 		eventoService.save(evento);
 		

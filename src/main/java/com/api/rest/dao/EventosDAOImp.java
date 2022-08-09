@@ -25,15 +25,15 @@ public class EventosDAOImp implements EventosDAO {
 
 		// Query<Eventos> theQuery = currentSession.createQuery("from events",
 		// Eventos.class);
-		List<Object[]> eventos = currentSession
+		List<Object[]> eventosData = currentSession
 				.createNativeQuery(
-						"SELECT TE.TEve_Descripcion, E.Eve_FechaCreacion, E.Eve_Cantidad, (E.Eve_Cantidad * TE.TEve_Valor) FROM eventos E\r\n"
-						+ "INNER JOIN tiposeventos TE ON TE.TEve_Codigo = E.TEve_Codigo WHERE E.Pla_Codigo = " + Pla_Codigo)
-				.list();
+						"SELECT TE.TEve_Descripcion, CONVERT(E.created_at, DATE), E.Eve_Cantidad, (E.Eve_Cantidad * TE.TEve_Valor) FROM eventos E\r\n"
+						+ "INNER JOIN tiposeventos TE ON TE.TEve_Codigo = E.TEve_Codigo WHERE E.Pla_Codigo = :pla ")
+				.setParameter( "pla", Pla_Codigo).list();
 
-		JSONArray myAObject = new JSONArray();
-		JSONObject myObject = new JSONObject();
-		for (Object[] evento : eventos) {
+		JSONArray myAObject = new JSONArray();		
+		for (Object[] evento : eventosData) {
+			JSONObject myObject = new JSONObject();
 			myObject.put("Evento", evento[0]);
 			myObject.put("Fecha", evento[1]);
 			myObject.put("Cantidad", evento[2]);

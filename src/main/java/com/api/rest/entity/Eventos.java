@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity(name = "events")
 @Table(name = "eventos")
 public class Eventos {
@@ -29,18 +31,18 @@ public class Eventos {
 	@Column(name = "Eve_Cantidad")
 	private int Eve_Cantidad;
 
-	@Column(name = "Eve_FechaCreacion")
-	private String Eve_FechaCreacion;
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private Date created_at;
 
 	public Eventos() {
 	}
 
-	public Eventos(int Eve_Codigo, int Pla_Codigo, int TEve_Codigo, int Eve_Cantidad, String Eve_FechaCreacion) {
+	public Eventos(int Eve_Codigo, int Pla_Codigo, int TEve_Codigo, int Eve_Cantidad) {
 		this.Eve_Codigo = Eve_Codigo;
 		this.Pla_Codigo = Pla_Codigo;
 		this.TEve_Codigo = TEve_Codigo;
 		this.Eve_Cantidad = Eve_Cantidad;
-		this.Eve_FechaCreacion = Eve_FechaCreacion;
 	}
 
 	public int getEve_Codigo() {
@@ -59,10 +61,6 @@ public class Eventos {
 		return Eve_Cantidad;
 	}
 
-	public String getEve_FechaCreacion() {
-		return Eve_FechaCreacion;
-	}
-
 	public void setEve_Codigo(int Eve_Codigo) {
 		this.Eve_Codigo = Eve_Codigo;
 	}
@@ -77,9 +75,5 @@ public class Eventos {
 
 	public void setEve_Cantidad(int Eve_Cantidad) {
 		this.Eve_Cantidad = Eve_Cantidad;
-	}
-
-	public void setEve_FechaCreacion(String Eve_FechaCreacion) {
-		this.Eve_FechaCreacion = Eve_FechaCreacion;
 	}
 }
