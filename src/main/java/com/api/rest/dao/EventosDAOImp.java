@@ -20,7 +20,7 @@ public class EventosDAOImp implements EventosDAO {
 	private EntityManager entityManager;
 
 	@Override
-	public JSONArray findAll() {
+	public JSONArray findAll(int Pla_Codigo) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		// Query<Eventos> theQuery = currentSession.createQuery("from events",
@@ -28,7 +28,7 @@ public class EventosDAOImp implements EventosDAO {
 		List<Object[]> eventos = currentSession
 				.createNativeQuery(
 						"SELECT TE.TEve_Descripcion, E.Eve_FechaCreacion, E.Eve_Cantidad, (E.Eve_Cantidad * TE.TEve_Valor) FROM eventos E\r\n"
-						+ "INNER JOIN tiposeventos TE ON TE.TEve_Codigo = E.TEve_Codigo")
+						+ "INNER JOIN tiposeventos TE ON TE.TEve_Codigo = E.TEve_Codigo WHERE E.Pla_Codigo = " + Pla_Codigo)
 				.list();
 
 		JSONArray myAObject = new JSONArray();

@@ -16,8 +16,8 @@ public class EventoServiceImp implements EventoService {
     private EventosDAO eventosDAO;
 
     @Override
-    public JSONArray findAll() {
-    	JSONArray listPlataforma = eventosDAO.findAll();
+    public JSONArray findAll(int Pla_Codigo) {
+    	JSONArray listPlataforma = eventosDAO.findAll(Pla_Codigo);
         return listPlataforma;
     }
 
